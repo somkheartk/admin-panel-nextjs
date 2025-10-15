@@ -2,7 +2,7 @@ import { Controller, Post, UseGuards, Request, Body, Get } from '@nestjs/common'
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { RegisterDto } from './dto/auth.dto';
+import { LoginDto, RegisterDto } from './dto/auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -10,7 +10,8 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async login(@Request() req, @Body() _loginDto: LoginDto) {
     return this.authService.login(req.user);
   }
 
